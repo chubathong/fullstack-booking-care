@@ -1,0 +1,85 @@
+{
+    "homeheader":{
+        "speciality":"Specialist",
+        "searchdoctor":"Find doctors by specialty",
+        "health-facility":"Health facilities",
+        "select-room":"Choose a hospital or clinic",
+        "doctor":"Doctor",
+        "select-doctor":"Choose a good doctor",
+        "fee":"Examination package",
+        "check-health":"General health examination",
+        "support":"Support",
+        "welcome":"Welcome"
+    },
+    "banner":{
+        "title1":"MEDICAL FOUNDATION",
+        "title2":"COMPREHENSIVE HEALTH CARE",
+        "child1":"Specialized examination",
+        "child2":"Remote examination",
+        "child3":"General examination",
+        "child4":"Medical test",
+        "child5":"Mental health",
+        "child6":"Dental examination"
+    },
+    "menu": {
+        "admin":{
+            "manage-user" : "User",
+            "manage-doctor" : "Manage Doctor",
+            "manage-admin" : "Manage admin",
+            "crud":"CRUD user",
+            "crud-redux":"CRUD Redux",
+            "manage-clinic":"Manage Clinic",
+            "clinic":"Clinic",
+            "handbook":"Handbook",
+            "manage-handbook":"Manage Handbook",
+            "specialty":"Specialty",
+            "manage-specialty":"Manage Specialty"
+        },
+        "doctor":{
+            "manage-schedule" : "Manage Doctor's schedule"
+
+        }
+    },
+    "manage-user":{
+        "add":"Add new user",
+        "email":"Email",
+        "password":"Password",
+        "firstName":"First Name",
+        "lastName":"Last Name",
+        "phoneNumber":"Phone Number",
+        "address":"Address",
+        "gender":"Gender",
+        "position":"Position",
+        "roleId":"RoleId",
+        "image":"Image",
+        "save":"Save",
+        "edit":"Edit"
+    },
+    "homepage":{
+        "top-doctors":"Last week's feartured doctors",
+        "more-info":"View more"
+    },
+    "manage-schedule":{
+        "title":"Manage doctor examination's plan",
+        "choose-doctor":"Choose doctor",
+        "choose-date":"Choose date",
+        "save":"Save infor"
+    },
+    "patient":{
+        "detail-doctor":{
+            "schedule":"Schedule",
+            "no-schedule":"Doctors do not have appointments during this time, please choose another time",
+            "choose":"Choose",    
+            "book-free":"book free"
+        }
+    },
+    "admin":{
+        "manage-doctor":{
+            "title":"title",
+            "select-doctor":"select doctor",
+            "intro":"intro",
+            "add":"Add",
+            "save":"Save"
+        }
+    }
+}
