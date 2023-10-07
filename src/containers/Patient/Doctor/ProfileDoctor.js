@@ -6,6 +6,7 @@ import { languages } from '../../../utils';
 import NumberFormat from 'react-number-format';
 import _ from 'lodash';
 import moment from 'moment';
+import { FormattedMessage } from 'react-intl';
 class ProfileDoctor extends Component {
     constructor(props) {
         super(props);
@@ -47,7 +48,7 @@ class ProfileDoctor extends Component {
             return (
                 <>
                     <div>{time} - {date}</div>
-                    <div>Miễn phí đặt lịch</div>
+                    <div><FormattedMessage id="patient.booking-modal.priceBooking" /></div>
                 </>
             )
         }
@@ -88,7 +89,7 @@ class ProfileDoctor extends Component {
                     </div>
                 </div>
                 <div className='price'>
-                    Giá khám:
+                    <FormattedMessage id="patient.booking-modal.price" />
                     {dataProfile && dataProfile.Doctor_Infor && language === languages.VI &&
 
                         <NumberFormat
