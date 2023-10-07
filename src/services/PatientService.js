@@ -13,27 +13,28 @@ let postBookAppointment = (data) => {
                 //upsert patient
                 let user = await db.User.findOrCreate({
                     where: { email: data.email },
-                    default: {
+                    defaults: {
                         email: data.email,
                         roleId: 'R3'
                     },
                 });
+                console.log('user ,', user)
                 //create booking record
                 if (user && user[0]) {
-                    await db.User.findOrCreate({
+                    await db.Booking.findOrCreate({
                         where: { patientId: user[0].id },
-                        default: {
-                            status: 'S1',
+                        defaults: {
+                            statusId: 'S1',
                             doctorId: data.doctorId,
                             patientId: user[0].id,
                             date: data.date,
                             timeType: data.timeType
-                        },
+                        }
                     })
                 }
                 resolve({
                     errorCode: 0,
-                    message: 'Save for patient succeed'
+                    message: 'Save infor patient succeed!'
                 })
             }
 
