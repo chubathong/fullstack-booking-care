@@ -13,6 +13,7 @@ import { postPatientBookAppointment } from '../../../../services/userService';
 import { toast } from 'react-toastify';
 import { FormattedMessage } from 'react-intl';
 import DatePicker from 'react-flatpickr';
+import moment from 'moment';
 class BookingModal extends Component {
     constructor(props) {
         super(props);
@@ -20,7 +21,7 @@ class BookingModal extends Component {
             fullName: '',
             phoneNumber: '',
             email: '',
-            addresss: '',
+            address: '',
             reason: '',
             birthday: '',
             selectedGender: '',
@@ -46,7 +47,7 @@ class BookingModal extends Component {
         return result;
     }
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.language !== this.props.language) {
+        if (this.props.language !== prevProps.language) {
             this.setState({
                 genders: this.buildDataGender(this.props.genders)
             })
@@ -86,17 +87,22 @@ class BookingModal extends Component {
 
     handleConfirmBooking = async () => {
         let date = new Date(this.state.birthday).getTime();
-
+        let timeString = this.buildTimeBooking(this.props.dataTime);
+        let doctorName = this.buildDoctorName(this.props.dataTime);
         let res = await postPatientBookAppointment({
             fullName: this.state.fullName,
             phoneNumber: this.state.phoneNumber,
             email: this.state.email,
-            addresss: this.state.addresss,
+            address: this.state.address,
             reason: this.state.reason,
-            date: date,
+            date: this.props.dataTime.date,
+            birthday: date,
             selectedGender: this.state.selectedGender.value,
             doctorId: this.state.doctorId,
             timeType: this.state.timeType,
+            language: this.props.language,
+            timeString: timeString,
+            doctorName: doctorName
         })
         if (res && res.errorCode === 0) {
             toast.success('Booking a new appointment succeed !')
@@ -104,6 +110,32 @@ class BookingModal extends Component {
         } else {
             toast.error('Booking a new appointment error !')
         }
+    }
+
+    buildTimeBooking = (dataTime) => {
+        let { language } = this.props;
+        if (dataTime && !_.isEmpty(dataTime)) {
+            let time = language === languages.VI ?
+                dataTime.timeTypeData.valueVi : dataTime.timeTypeData.valueEn;
+
+            let date = language === languages.VI ?
+                moment.unix(+dataTime.date / 1000).format('dddd - DD/MM/YYYY    ')
+                :
+                moment.unix(+dataTime.date / 1000).locale('en').format('ddd - MM/DD/YYYY')
+            return `${time} - ${date}`
+        }
+        return '';
+    }
+    buildDoctorName = (dataTime) => {
+        let { language } = this.props;
+        if (dataTime && !_.isEmpty(dataTime)) {
+            let name = language === languages.VI ?
+                `${dataTime.doctorData.lastName} ${dataTime.doctorData.firstName}`
+                :
+                `${dataTime.doctorData.firstName} ${dataTime.doctorData.lastName}`
+            return name
+        }
+        return ''
     }
 
     render() {
@@ -135,7 +167,10 @@ class BookingModal extends Component {
                             <ProfileDoctor
                                 doctorId={doctorId}
                                 isShowDescriptionDoctor={false}
-                                dataTime={dataTime} />
+                                dataTime={dataTime}
+                                isShowLinkDetail={false}
+                                isShowPrice={true}
+                            />
                         </div>
                         <div className='row'>
                             <div className='col-6 form-group'>
@@ -159,8 +194,8 @@ class BookingModal extends Component {
                             <div className='col-6 form-group'>
                                 <label><FormattedMessage id="patient.booking-modal.address" /></label>
                                 <input className='form-control'
-                                    value={this.state.addresss}
-                                    onChange={(event) => this.handleOnChangeInput(event, 'addresss')} />
+                                    value={this.state.address}
+                                    onChange={(event) => this.handleOnChangeInput(event, 'address')} />
                             </div>
                             <div className='col-6 form-group'>
                                 <label><FormattedMessage id="patient.booking-modal.reason" /></label>
@@ -187,7 +222,8 @@ class BookingModal extends Component {
                         </div>
                     </div>
                     <div className='booking-modal-footer'>
-                        <button className='btn-booking-confirm' onClick={this.handleConfirmBooking()} ><FormattedMessage id="patient.booking-modal.btnConfirm" />
+                        <button className='btn-booking-confirm'
+                            onClick={() => this.handleConfirmBooking()} ><FormattedMessage id="patient.booking-modal.btnConfirm" />
 
                         </button>
                         <button className='btn-booking-cancel' onClick={closeBookingClose}><FormattedMessage id="patient.booking-modal.btnCancel" />

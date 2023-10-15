@@ -7,6 +7,7 @@ import NumberFormat from 'react-number-format';
 import _ from 'lodash';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router-dom';
 class ProfileDoctor extends Component {
     constructor(props) {
         super(props);
@@ -56,7 +57,9 @@ class ProfileDoctor extends Component {
     }
     render() {
         let { dataProfile } = this.state;
-        let { language, isShowDescriptionDoctor, dataTime } = this.props;
+        let { language, isShowDescriptionDoctor, dataTime,
+            isShowLinkDetail, isShowPrice, doctorId
+        } = this.props;
 
         let nameVi = '', nameEn = '';
         if (dataProfile && dataProfile.positionData) {
@@ -88,29 +91,41 @@ class ProfileDoctor extends Component {
                         </div>
                     </div>
                 </div>
-                <div className='price'>
-                    <FormattedMessage id="patient.booking-modal.price" />
-                    {dataProfile && dataProfile.Doctor_Infor && language === languages.VI &&
 
-                        <NumberFormat
-                            className='currency'
-                            value={dataProfile.Doctor_Infor.priceTypeData.valueVi}
-                            displayType={'text'}
-                            thousandSeparator={true}
-                            suffix={'VNĐ'}
-                        />
-                    }
+                {isShowLinkDetail === true &&
+                    <div className='view-detail-doctor'>
+                        <Link to={`/detail-doctor/${doctorId}`}>Xem thêm</Link>
 
-                    {dataProfile && dataProfile.Doctor_Infor && language === languages.EN &&
-                        <NumberFormat
-                            className='currency'
-                            value={dataProfile.Doctor_Infor.priceTypeData.valueEn}
-                            displayType={'text'}
-                            thousandSeparator={true}
-                            suffix={'$'}
-                        />
-                    }
-                </div>
+                    </div>
+                }
+
+                {isShowPrice &&
+                    <div className='price'>
+                        <FormattedMessage id="patient.booking-modal.price" />
+                        {dataProfile && dataProfile.Doctor_Infor && language === languages.VI &&
+
+                            <NumberFormat
+                                className='currency'
+                                value={dataProfile.Doctor_Infor.priceTypeData.valueVi}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                                suffix={'VNĐ'}
+                            />
+                        }
+
+                        {dataProfile && dataProfile.Doctor_Infor && language === languages.EN &&
+                            <NumberFormat
+                                className='currency'
+                                value={dataProfile.Doctor_Infor.priceTypeData.valueEn}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                                suffix={'$'}
+                            />
+                        }
+                    </div>
+
+                }
+
 
             </div>
         );

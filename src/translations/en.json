@@ -36,7 +36,8 @@
             "manage-specialty":"Manage Specialty"
         },
         "doctor":{
-            "manage-schedule" : "Manage Doctor's schedule"
+            "manage-schedule" : "Manage Doctor's schedule",
+            "manage-patient" : "Manage Doctor's patient"  
 
         }
     },
@@ -57,7 +58,8 @@
     },
     "homepage":{
         "top-doctors":"Last week's feartured doctors",
-        "more-info":"View more"
+        "more-info":"View more",
+        "specialty-popular":"Speciality Popular"
     },
     "manage-schedule":{
         "title":"Manage doctor examination's plan",
@@ -106,7 +108,9 @@
             "province":"Province",
             "nameClinic":"Clinic's name",
             "addressClinic":"Clinic's address",
-            "note":"Note"
+            "note":"Note",
+            "specialty":"Specialty",
+            "select-clinic":"Select Clinic"
         }
     }
 }
