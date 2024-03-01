@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  'config': path.resolve('./src/config', 'config.json'),
+  'config': path.resolve('./src/config', 'config.js'),
   'migrations-path': path.resolve('./src', 'migrations'),//migration:tạo bảng database
   'models-path': path.resolve('./src', 'models'),//models:tự tạo model trong src
   'seeders-path': path.resolve('./src', 'seeders')//seeders:tạo dữ liệu fake

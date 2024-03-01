@@ -39,7 +39,6 @@ let postBookAppointment = (data) => {
                         firstName: data.fullName
                     },
                 });
-                console.log('user1 ,', user)
                 //create booking record
                 if (user && user[0]) {
                     await db.Booking.findOrCreate({
@@ -54,7 +53,6 @@ let postBookAppointment = (data) => {
                         }
                     })
                 }
-                console.log('user2 ,', user)
                 resolve({
                     errorCode: 0,
                     message: 'Save infor patient succeed!'

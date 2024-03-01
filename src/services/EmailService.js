@@ -58,14 +58,37 @@ let getBodyHTMLEmail = (dataSend) => {
     return result;
 }
 
+let getBodyHTMLEmail2 = (dataSend) => {
+    let result = ''
+    if (dataSend.language === 'vi') {
+        result =
+            `
+        <h3>Xin chào ${dataSend.patientName}</h3>
+        <p>Bạn nhận được email này vì đã đặt lịch khám bệnh online trên booking care</p>
+        <p>Thông tin đặt lịch khám bệnh:</p>
 
+        <div>Xin chân thành cảm ơn</div>
+        `
+    }
+    if (dataSend.language === 'en') {
+        result =
+            `
+        <h3>Hello ${dataSend.patientName}</h3>
+        <p>You received this email because you booked an online medical appointment on booking care</p>
+        <p>Information for scheduling medical examination:</p>
+
+        <div>Thank you</div>
+        `
+    }
+    return result;
+}
 let sendAttachment = async (dataSend) => {
     return new Promise(async (resolve, reject) => {
         try {
             let transporter = nodemailer.createTransport({
                 host: "smtp.gmail.com",
-                port: 465,
-                secure: true,
+                port: 587,
+                secure: false,
                 auth: {
                     user: process.env.EMAIL_APP,
                     pass: process.env.EMAIL_APP_PASSWORD
@@ -73,9 +96,9 @@ let sendAttachment = async (dataSend) => {
             });
             let info = await transporter.sendMail({
                 from: '"MaMa 👻" <helloworld@example.com>', // sender address
-                to: dataSend.receiverEmail, // list of receivers
+                to: dataSend.email, // list of receivers
                 subject: "Hello ✔", // Subject line    
-                html: getBodyHTMLEmail(dataSend), // html body
+                html: getBodyHTMLEmail2(dataSend), // html body
                 attachments: [
                     {
                         filename: `remedy-${dataSend.patientId}-${new Date().getTime()}.png`,
