@@ -80,12 +80,13 @@ class ManagePatient extends Component {
         let res = await postSendRemedy({
             email: dataChild.email,
             imgBase64: dataChild.imgBase64,
-            doctorId: dataChild.doctorId,
-            patientId: dataChild.patientId,
-            timeType: dataChild.timeType,
+            doctorId: dataModal.doctorId,
+            patientId: dataModal.patientId,
+            timeType: dataModal.timeType,
             language: this.props.language,
-            patientName: dataChild.patientName
+            patientName: dataModal.patientName
         });
+
         if (res && res.errorCode === 0) {
             this.setState({
                 isShowLoading: false
@@ -142,9 +143,9 @@ class ManagePatient extends Component {
                                         {dataPatient && dataPatient.length > 0 ?
                                             dataPatient.map((item, index) => {
                                                 let time = language === languages.VI ?
-                                                    item.timeTypeDataPatien && item.timeTypeDataPatient.valueVi
+                                                    item.timeTypeDataPatient && item.timeTypeDataPatient.valueVi
                                                     :
-                                                    item.timeTypeDataPatien && item.timeTypeDataPatient.valueEn
+                                                    item.timeTypeDataPatient && item.timeTypeDataPatient.valueEn
                                                 let gender = language === languages.VI ?
                                                     item.patientData && item.patientData.genderData && item.patientData.genderData.valueVi
                                                     :
