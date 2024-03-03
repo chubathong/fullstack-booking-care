@@ -7,10 +7,9 @@ let getTopDoctors = async (req, res) => {
         let response = await doctorService.getTopDoctors(+limit); //convert string to number
         return res.status(200).json(response);
     } catch (error) {
-        console.log(error);
         return res.status(200).json({
             errorCode: -1,
-            message: 'Error from server...'
+            message: error
         })
     }
 }
@@ -86,10 +85,9 @@ let getExtraInforDoctorId = async (req, res) => {
         let info = await doctorService.getExtraInforDoctorId(req.query.doctorId);
         return res.status(200).json(info)
     } catch (error) {
-        console.log(error)
         return res.status(200).json({
             errorCode: -1,
-            message: "Error from server"
+            message: error
         })
     }
 }
@@ -98,10 +96,9 @@ let getProfileDoctorById = async (req, res) => {
         let info = await doctorService.getProfileDoctorById(req.query.doctorId);
         return res.status(200).json(info)
     } catch (error) {
-        console.log(error)
         return res.status(200).json({
             errorCode: -1,
-            message: "Error from server"
+            message: error
         })
     }
 }
@@ -111,10 +108,9 @@ let getListPatientForDoctor = async (req, res) => {
         let info = await doctorService.getListPatientForDoctor(req.query.doctorId, req.query.date);
         return res.status(200).json(info)
     } catch (error) {
-        console.log(error)
         return res.status(200).json({
             errorCode: -1,
-            message: "Error from server"
+            message: error
         })
     }
 }
@@ -123,10 +119,9 @@ let sendRemedy = async (req, res) => {
         let info = await doctorService.sendRemedy(req.body);
         return res.status(200).json(info)
     } catch (error) {
-        console.log(error)
         return res.status(200).json({
             errorCode: -1,
-            message: "Error from server"
+            message: error
         })
     }
 }

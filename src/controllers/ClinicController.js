@@ -8,10 +8,9 @@ let createClinic = async (req, res) => {
         )
 
     } catch (error) {
-        console.log(error)
         return res.status(200).json({
             errorCode: -1,
-            message: "Error from server"
+            message: error
         });
     }
 }
@@ -23,10 +22,9 @@ let getAllClinic = async (req, res) => {
             infor
         );
     } catch (error) {
-        console.log(error)
         return res.status(200).json({
             errorCode: -1,
-            message: "Error from server"
+            message: error
         });
     }
 }
@@ -38,10 +36,9 @@ let getDetailClinicById = async (req, res) => {
             data
         );
     } catch (error) {
-        console.log(error)
         return res.status(200).json({
             errorCode: -1,
-            message: "Error from server"
+            message: error
         });
     }
 }

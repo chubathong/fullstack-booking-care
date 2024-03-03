@@ -75,10 +75,9 @@ let getAllCode = async (req, res) => {
         let data = await userService.getAllCode(req.query.type);
         return res.status(200).json(data);
     } catch (error) {
-        console.log('get all code error', error)
         return res.status(200).json({
             errorCode: -1,
-            message: "Error from server"
+            message: error
         });
     }
 

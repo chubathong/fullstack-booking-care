@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 //uuid  library -> tạo ra 1 chuỗi token ngẫu nhiên
 let buildUrlEmail = (doctorId, token) => {
-    let result = `${process.env.URL_REACT}verify-booking?token=${token}&doctorId=${doctorId}`
+    let result = `${process.env.URL_REACT}/verify-booking?token=${token}&doctorId=${doctorId}`
     return result;
 }
 let postBookAppointment = (data) => {

@@ -58,7 +58,7 @@ let getBodyHTMLEmail = (dataSend) => {
     return result;
 }
 
-let getBodyHTMLEmail2 = (dataSend) => {
+let getBodyHTMLEmailRemedy = (dataSend) => {
     let result = ''
     if (dataSend.language === 'vi') {
         result =
@@ -97,15 +97,15 @@ let sendAttachment = async (dataSend) => {
             let info = await transporter.sendMail({
                 from: '"MaMa 👻" <helloworld@example.com>', // sender address
                 to: dataSend.email, // list of receivers
-                subject: "Hello ✔", // Subject line    
-                html: getBodyHTMLEmail2(dataSend), // html body
+                subject: "Kết quả đặt lịch khám bệnh", // Subject line    
+                html: getBodyHTMLEmailRemedy(dataSend), // html body
                 attachments: [
                     {
                         filename: `remedy-${dataSend.patientId}-${new Date().getTime()}.png`,
                         content: dataSend.imgBase64.split("base64,")[1],
                         encoding: 'base64'
-                    }
-                ]
+                    },
+                ],
             });
             resolve(true)
         } catch (error) {
